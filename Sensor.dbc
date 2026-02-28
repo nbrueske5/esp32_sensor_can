@@ -1,0 +1,320 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: ECU Mid_IMU Front_IMU SBG SW RTS DL
+
+
+BO_ 1 SW_Control: 8 ECU
+ SG_ SW_LED_Number : 0|4@1+ (5,0) [0|0] "num"  DL,SW
+ SG_ SW_LED_Brightness : 4|7@1+ (1,0) [0|100] "%"  DL,SW
+ SG_ SW_LED_R : 12|8@1+ (1,0) [0|0] ""  DL,SW
+ SG_ SW_LED_G : 20|8@1+ (1,0) [0|0] ""  DL
+ SG_ SW_LED_B : 28|8@1+ (1,0) [0|0] ""  DL
+
+BO_ 16 SW_Inputs: 8 SW
+ SG_ SW_Button1 : 0|1@1+ (1,0) [0|0] "flag"  DL,ECU
+ SG_ SW_Button2 : 2|1@1+ (1,0) [0|0] "flag"  DL,ECU
+ SG_ SW_DialLeft : 11|4@1+ (1,0) [0|10] "index"  DL,ECU
+ SG_ SW_DialRight : 16|4@1+ (1,0) [0|10] "index"  DL,ECU
+ SG_ SW_JoystickCENTER : 6|1@1+ (1,0) [0|0] "flag"  DL,ECU
+ SG_ SW_JoystickDOWN : 7|1@1+ (1,0) [0|0] "flag"  DL,ECU
+ SG_ SW_JoystickLEFT : 8|1@1+ (1,0) [0|0] "flag"  DL,ECU
+ SG_ SW_JoystickRIGHT : 9|1@1+ (1,0) [0|0] "flag"  DL,ECU
+ SG_ SW_JoystickUP : 10|1@1+ (1,0) [0|0] "flag"  DL,ECU
+
+BO_ 112 Front_IMU_Lat: 8 Front_IMU
+ SG_ IMU_Front_YawRate : 0|16@1- (0.005,-163.84) [-163|163] "deg/s"  ECU,DL,SW
+ SG_ IMU_Front_Accel_Lat : 32|16@1- (0.0001274,-4.07464) [-4.2|4.2] "g"  ECU,DL,SW
+
+BO_ 128 Front_IMU_Tang: 8 Front_IMU
+ SG_ IMU_Front_Accel_Tang : 32|16@1- (0.0001274,-4.2) [-4.2|4.2] "g"  ECU,DL,SW
+ SG_ IMU_Front_RollRate : 0|16@1- (0.005,-163.84) [-163|163] "deg/s"  ECU,DL,SW
+
+BO_ 1398 Front_IMU_Vert: 8 Front_IMU
+ SG_ IMU_Front_Accel_Vert : 32|16@1- (0.0001274,-4.2) [-4.2|4.2] "g"  ECU,DL,SW
+
+BO_ 380 Mid_IMU_Vert: 8 Mid_IMU
+ SG_ IMU_Mid_Accel_Vert : 32|16@1- (0.000127465,-4.1768) [-4.1768|4.1765] "g"  ECU,DL,SW
+
+BO_ 376 Mid_IMU_Tang: 8 Mid_IMU
+ SG_ IMU_Mid_RollRate : 0|16@1- (0.005,-163.84) [-163.84|163.835] " deg/s"  ECU,DL,SW
+ SG_ IMU_Mid_Accel_Tang : 32|16@1- (0.000127465,-4.1768) [-4.1768|4.1765] "g"  ECU,DL,SW
+
+BO_ 372 Mid_IMU_Lat: 8 Mid_IMU
+ SG_ IMU_Mid_YawRate : 0|16@1- (0.005,-163.84) [-163.84|163.83] " deg/s"  ECU,DL,SW
+ SG_ IMU_Mid_Accel_Lat : 32|16@1- (0.000127465,-4.1768) [-4.1768|4.1765] "g"  ECU,DL,SW
+
+BO_ 309 SBG_EKFAltitude: 6 SBG
+ SG_ SBG_Undulation : 32|16@1- (0.005,0) [0|0] ""  ECU,DL,SW
+ SG_ SBG_Altitude : 0|32@1- (0.001,0) [0|0] "m"  ECU,DL,SW
+
+BO_ 373 SBG_GPSPosition: 8 SBG
+ SG_ SBG_GPSLongitude : 32|32@1- (1E-07,0) [0|0] ""  ECU,DL,SW
+ SG_ SBG_GPSLatitude : 0|32@1- (1E-07,0) [0|0] ""  ECU,DL,SW
+
+BO_ 308 SBG_EKFPosition: 8 SBG
+ SG_ SBG_EKFLongitude : 32|32@1- (1E-07,0) [0|0] ""  ECU,DL,SW
+ SG_ SBG_EKFLatitude : 0|32@1- (1E-07,0) [0|0] ""  ECU,DL,SW
+
+BO_ 311 SBG_EKFVelocity: 6 SBG
+ SG_ SBG_VelocityVert : 32|16@1- (0.01,0) [0|0] "m/s"  ECU,DL,SW
+ SG_ SBG_VelocityLat : 16|16@1- (0.01,0) [0|0] "m/s"  ECU,DL,SW
+ SG_ SBG_VelocityTang : 0|16@1- (0.01,0) [0|0] "m/s"  ECU,DL,SW
+
+BO_ 371 SBG_Heading: 3 SBG
+ SG_ SBG_Heading : 0|16@1+ (0.01,0) [0|0] "deg"  ECU,DL,SW
+
+BO_ 290 SBG_Gyro: 7 SBG
+ SG_ SBG_YawRateZ : 32|16@1- (0.001,0) [0|0] "deg/s"  ECU,DL,SW
+ SG_ SBG_YawRateY : 16|16@1- (0.001,0) [0|0] "deg/s"  ECU,DL,SW
+ SG_ SBG_YawRateX : 0|16@1- (0.001,0) [0|0] "deg/s"  ECU,DL,SW
+
+BO_ 306 SBG_RollYawPitch: 7 SBG
+ SG_ SBG_Yaw : 32|16@1- (0.0001,0) [0|0] "rad"  ECU,DL,SW
+ SG_ SBG_Roll : 0|16@1- (0.0001,0) [0|0] "rad"  ECU,DL,SW
+ SG_ SBG_Pitch : 16|16@1- (0.0001,0) [0|0] "rad"  ECU,DL,SW
+
+BO_ 370 SBG_VelocityInfo: 8 SBG
+ SG_ SBG_VelocityType : 38|6@1+ (1,0) [0|0] ""  ECU,DL,SW
+ SG_ SBG_VelocityStatus : 32|6@1+ (1,0) [0|0] ""  ECU,DL,SW
+
+BO_ 289 SBG_Acceleration: 7 SBG
+ SG_ SBG_AccelVert : 32|16@1- (0.01,0) [0|0] "m/s2"  ECU,DL,SW
+ SG_ SBG_AccelLat : 16|16@1- (0.01,0) [0|0] "m/s2"  ECU,DL,SW
+ SG_ SBG_AccelTang : 0|16@1- (0.01,0) [0|0] "m/s2"  ECU,DL,SW
+
+BO_ 313 SBG_Body_Vel: 6 SBG
+ SG_ Vel_Tang : 0|16@1- (0.01,0) [0|0] "m/s"  ECU,DL,SW
+ SG_ Vel_Lat : 16|16@1- (0.01,0) [0|0] "m/s"  ECU,DL,SW
+ SG_ Vel_Vert : 32|16@1- (0.01,0) [0|0] "m/s"  ECU,DL,SW
+
+BO_ 1220 Brake_Rotor_Temp1: 8 RTS
+ SG_ Rotor_Temp_1 : 7|16@0+ (0.1,-100) [0|6452] "C"  DL,SW
+ SG_ Rotor_Temp_2 : 23|16@0+ (0.1,-100) [0|6452] "C"  DL,SW
+ SG_ Rotor_Temp_3 : 39|16@0+ (0.1,-100) [0|6452] "C"  DL,SW
+ SG_ Rotor_Temp_4 : 55|16@0+ (0.1,-100) [0|6452] "C"  DL,SW
+
+BO_ 1221 Brake_Rotor_Temp2: 8 RTS
+ SG_ Rotor_Temp_5 : 7|16@0+ (0.1,-100) [0|6452] "C"  DL,SW
+ SG_ Rotor_Temp_6 : 23|16@0+ (0.1,-100) [0|6452] "C"  DL,SW
+ SG_ Rotor_Temp_7 : 39|16@0+ (0.1,-100) [0|6452] "C"  DL,SW
+ SG_ Rotor_Temp_8 : 55|16@0+ (0.1,-100) [0|6452] "C"  DL,SW
+
+BO_ 1222 Brake_Rotor_Temp3: 8 RTS
+ SG_ Rotor_Temp_9 : 7|16@0+ (0.1,-100) [0|6452] "C"  DL,SW
+ SG_ Rotor_Temp_10 : 23|16@0+ (0.1,-100) [0|6452] "C"  DL,SW
+ SG_ Rotor_Temp_11 : 39|16@0+ (0.1,-100) [0|6452] "C"  DL,SW
+ SG_ Rotor_Temp_12 : 55|16@0+ (0.1,-100) [0|6452] "C"  DL,SW
+
+BO_ 1223 Brake_Rotor_Temp4: 8 RTS
+ SG_ Rotor_Temp_13 : 7|16@0+ (0.1,-100) [0|6452] "C"  DL,SW
+ SG_ Rotor_Temp_14 : 23|16@0+ (0.1,-100) [0|6452] "C"  DL,SW
+ SG_ Rotor_Temp_15 : 39|16@0+ (0.1,-100) [0|6452] "C"  DL,SW
+ SG_ Rotor_Temp_16 : 55|16@0+ (0.1,-100) [0|6452] "C"  DL,SW
+
+BO_ 1224 Brake_Rotor_Sensor_Temp: 2 RTS
+ SG_ Brake_Sensor_Temp : 7|16@0+ (0.1,-100) [0|0] "C"  DL,SW
+
+BO_ 193 Log_Driver_Inputs: 8 ECU
+ SG_ Brake_Pedal_Pressure_Front : 0|11@1+ (0.1,0) [0|200] "Bar"  DL,SW
+ SG_ Brake_Pressure_Rear : 11|11@1+ (0.1,0) [0|200] "Bar"  DL,SW
+ SG_ Accel_Pedal_Position_1 : 22|10@1+ (0.1,0) [0|100] "%"  DL,SW
+ SG_ Accel_Pedal_Position_2 : 32|10@1+ (0.1,0) [0|100] "%"  DL,SW
+ SG_ Accel_Pedal_Position_Arb : 42|10@1+ (0.1,0) [0|100] "%"  DL,SW
+ SG_ Brake_Flag : 52|1@1+ (1,0) [0|1] "flag"  DL,SW
+ SG_ Tripping_BPS : 53|1@1+ (1,0) [0|1] "flag"  DL,SW
+ SG_ Steering_Angle : 54|1@1+ (1,0) [0|1] "flag"  DL,SW
+
+BO_ 2 Log_Wheel_Slip: 8 ECU
+ SG_ Wheel_Slip_FL : 0|12@1- (0.001,0) [-3|3] "ratio"  DL,SW
+ SG_ Wheel_Slip_FR : 12|12@1- (0.001,0) [-3|3] "ratio"  DL,SW
+ SG_ Wheel_Slip_RL : 24|12@1- (0.001,0) [-3|3] "ratio"  DL,SW
+ SG_ Wheel_Slip_RR : 36|12@1- (0.001,0) [-3|3] "ratio"  DL,SW
+ SG_ SlipTarget : 48|7@1+ (0.01,0) [0|1] "ratio"  DL,SW
+
+BO_ 3 Log_States: 8 ECU
+ SG_ Pump_Enabled : 0|1@1+ (1,0) [0|1] "flag"  DL,SW
+ SG_ Fans_Enabled : 1|1@1+ (1,0) [0|1] "flag"  DL,SW
+ SG_ Regen_Enabled : 2|1@1+ (1,0) [0|1] "flag"  DL,SW
+ SG_ Motors_Enabled : 3|1@1+ (1,0) [0|1] "flag"  DL,SW
+ SG_ RTD : 4|1@1+ (1,0) [0|1] "flag"  DL,SW
+ SG_ AIRS : 5|1@1+ (1,0) [0|1] "flag"  DL,SW
+ SG_ ECU_Open_AIRS : 6|1@1+ (1,0) [0|1] "flag"  DL,SW
+ SG_ Speed_Limit_Enabled : 7|1@1+ (1,0) [0|1] "flag"  DL,SW
+ SG_ Time : 8|25@1+ (0.01,0) [0|0] "seconds"  DL,SW
+
+BO_ 4 Log_Traction_Control: 8 ECU
+ SG_ TC_Torque_Limit_FL : 0|9@1+ (0.1,0) [0|30] "Nm"  DL,SW
+ SG_ TC_Torque_Limit_FR : 9|9@1+ (0.1,0) [0|30] "Nm"  DL,SW
+ SG_ TC_Torque_Limit_RL : 18|9@1+ (0.1,0) [0|30] "Nm"  DL,SW
+ SG_ TC_Torque_Limit_RR : 27|9@1+ (0.1,0) [0|30] "Nm"  DL,SW
+ SG_ TC_Setting : 36|4@1+ (1,0) [0|10] "index"  DL,SW
+ SG_ TC_Active : 40|1@1+ (1,0) [0|0] "flag"  DL,SW
+
+BO_ 79 Log_Battery_Limits: 8 ECU
+ SG_ Charge_Power_Limit : 0|10@1+ (0.1,0) [0|40] "kW"  DL,SW
+ SG_ Discharge_Power_Limit : 10|10@1+ (0.1,0) [0|80] "kW"  DL,SW
+
+BO_ 7 Log_Torque_Limits: 8 ECU
+ SG_ Speed_Lim_Torque_Max : 0|10@1- (0.1,0) [-30|30] "Nm"  DL,SW
+ SG_ Global_Torque_Max : 10|10@1- (0.1,0) [-30|30] "Nm"  DL,SW
+ SG_ Global_Torque_Min : 20|10@1- (0.1,0) [-30|30] "Nm"  DL,SW
+ SG_ Power_Torque_Max : 30|10@1- (0.1,0) [-30|30] "Nm"  DL,SW
+ SG_ Power_Torque_Min : 40|10@1- (0.1,0) [-30|30] "Nm"  DL,SW
+ SG_ Low_Speed_Torque_Min : 50|10@1- (0.1,0) [-30|30] "Nm"  DL,SW
+
+BO_ 8 Log_Motor_Power: 8 ECU
+ SG_ Motor_Power_FL : 0|10@1- (0.1,0) [-10|40] "W"  DL,SW
+ SG_ Motor_Power_FR : 10|10@1- (0.1,0) [-10|40] "W"  DL,SW
+ SG_ Motor_Power_RL : 20|10@1- (0.1,0) [-10|40] "W"  DL,SW
+ SG_ Motor_Power_RR : 30|10@1- (0.1,0) [-10|40] "W"  DL,SW
+
+BO_ 9 Log_Vehicle_Dynamics: 8 ECU
+ SG_ G_Ratio : 0|7@1+ (0.01,0) [0|0] "ratio"  DL,SW
+ SG_ G_Theoretical : 7|8@1+ (0.01,0) [0|0] "g"  DL,SW
+ SG_ G_Angle : 15|8@1- (0.027,0) [0|0] "rad"  DL,SW
+ SG_ G_Actual : 23|8@1+ (0.01,0) [0|3] "g"  DL,SW
+
+BO_ 11 Log_Torque_Vectoring: 8 ECU
+ SG_ TV_Torque_Change_FL : 0|12@1- (0.01,0) [0|0] "Nm"  DL,SW
+ SG_ TV_Torque_Change_FR : 12|12@1- (0.01,0) [0|0] "Nm"  DL,SW
+ SG_ TV_Torque_Change_RL : 24|12@1- (0.01,0) [0|0] "Nm"  DL,SW
+ SG_ TV_Torque_Change_RR : 36|12@1- (0.01,0) [0|0] "Nm"  DL,SW
+ SG_ TV_Active : 48|1@1+ (1,0) [0|0] "flag"  DL,SW
+ SG_ TV_Setting : 49|4@1+ (1,0) [0|0] "index"  DL,SW
+
+BO_ 5 Log_Lap_Times: 8 ECU
+ SG_ LastLapTime : 0|13@1+ (0.01,0) [0|0] "sec"  DL,SW
+ SG_ LapTimerTrigger : 63|1@1+ (1,0) [0|0] ""  DL,SW
+ SG_ LapDistance : 35|14@1+ (0.1,0) [0|0] "m"  DL,SW
+ SG_ LapCounter : 13|6@1+ (1,0) [0|63] ""  DL,SW
+ SG_ LastSectorTime : 19|13@1+ (0.01,0) [0|0] "sec"  DL,SW
+ SG_ SectorNum : 32|3@1+ (1,0) [0|7] ""  DL,SW
+ SG_ SectorDistance : 49|14@1+ (0.1,0) [0|0] "m"  DL,SW
+
+BO_ 10 ECU_Battery_Tracking: 8 ECU
+ SG_ ECU_LastKnownSOC : 0|10@1+ (0.1,0) [0|0] "%"  DL,SW
+ SG_ ECU_SOC : 10|10@1+ (0.1,0) [0|0] "%"  DL,SW
+ SG_ TotalEnergyUsed : 20|13@1+ (1,0) [0|0] "Wh"  DL,SW
+ SG_ ECU_SOC_est_State : 33|3@1+ (1,0) [0|0] ""  DL,SW
+
+BO_ 13 Log_Load_Transfer: 8 ECU
+ SG_ NormalForce_FL : 0|12@1+ (1,0) [0|0] "N"  DL,SW
+ SG_ NormalForce_FR : 12|12@1+ (1,0) [0|0] "N"  DL,SW
+ SG_ NormalForce_RL : 24|12@1+ (1,0) [0|0] "N"  DL,SW
+ SG_ NormalForce_RR : 36|12@1+ (1,0) [0|0] "N"  DL,SW
+ SG_ Downforce : 48|12@1+ (1,0) [0|0] "N"  SW,DL
+
+BO_ 6 Log_Speed_Estimation: 8 ECU
+ SG_ Est_Speed_FL : 0|7@1+ (1,0) [0|0] "mph"  SW,DL
+ SG_ Est_Speed_FR : 7|7@1+ (1,0) [0|0] "mph"  SW,DL
+ SG_ Est_Speed_RL : 14|7@1+ (1,0) [0|0] "mph"  SW,DL
+ SG_ Est_Speed_RR : 21|7@1+ (1,0) [0|0] "mph"  SW,DL
+ SG_ Est_Speed_Vehicle : 28|10@1+ (0.1,0) [0|0] "mph"  SW,DL
+
+BO_ 12 Log_Traction_Control_Components: 8 ECU
+ SG_ TC_FB_FL : 0|7@1- (0.1,0) [0|0] "Nm"  DL,SW
+ SG_ TC_FB_FR : 7|7@1- (0.1,0) [0|0] "Nm"  DL,SW
+ SG_ TC_FB_RL : 14|7@1- (0.1,0) [0|0] "Nm"  DL,SW
+ SG_ TC_FB_RR : 21|7@1- (0.1,0) [0|0] "Nm"  DL,SW
+ SG_ TC_FF_FL : 28|9@1- (0.1,0) [0|0] "Nm"  DL,SW
+ SG_ TC_FF_FR : 37|9@1- (0.1,0) [0|0] "Nm"  DL,SW
+ SG_ TC_FF_RL : 46|9@1- (0.1,0) [0|0] "Nm"  DL,SW
+ SG_ TC_FF_RR : 55|9@1- (0.1,0) [0|0] "Nm"  DL,SW
+
+
+
+CM_ BU_ ECU "ECU-48 messages on sensor CAN";
+CM_ BU_ Front_IMU "Bosch yaw rate sensor";
+CM_ BU_ SBG "SBG Inertia measurement unit";
+CM_ BU_ SW "Steering Wheel";
+CM_ BU_ RTS "Rotor Temperture Sensor
+CM_ BO_ 1 ";
+CM_ BU_ DL "Data Logger (C70)";
+CM_ SG_ 1 SW_LED_Number "how many LEDs are on (on the steering wheel)";
+CM_ SG_ 1 SW_LED_R "0-256 of the red of the steering wheel LEDs";
+CM_ SG_ 1 SW_LED_G "0-256 of the green of the steering wheel LEDs";
+CM_ SG_ 1 SW_LED_B "0-256 of the blue of the steering wheel LEDs";
+CM_ BO_ 1 "all of the driver's inputs";
+CM_ BO_ 2 "the wheel slip ratios and the target ratio (of the FL wheel)";
+CM_ SG_ 2 SlipTarget "only of the FL wheel, they are all a little different based on normal for ce and such";
+CM_ BO_ 3 "all of the states of the car";
+CM_ SG_ 3 Pump_Enabled "if the pump is enabled";
+CM_ SG_ 3 Fans_Enabled "if the fans are enabled";
+CM_ SG_ 3 Regen_Enabled "if the motors are allowed to regen";
+CM_ SG_ 3 Motors_Enabled "if the motors are allowed to do any torque (regen and discharge)";
+CM_ SG_ 3 RTD "if the car is ready to drive";
+CM_ SG_ 3 AIRS "if the AIRS have been opened";
+CM_ SG_ 3 ECU_Open_AIRS "if the ECU has opened the AIRS";
+CM_ SG_ 3 Speed_Limit_Enabled "if the speed limit is enabled";
+CM_ SG_ 3 Time "just a time value";
+CM_ BO_ 4 "traction control info";
+CM_ SG_ 4 TC_Torque_Limit_RL "the torque limit from traction control";
+CM_ SG_ 4 TC_Torque_Limit_RR "the torque limit from traction control";
+CM_ SG_ 4 TC_Setting "what percent of the traction control limits are in use. If zero, traction control is off. If 100, traction control is in full use.";
+CM_ SG_ 4 TC_Active "if traction control is active";
+CM_ BO_ 7 "the limits put on the motors by the battery";
+CM_ SG_ 7 Charge_Power_Limit "The limit on how fast the battery can be charged (regen/negative torque)";
+CM_ SG_ 7 Discharge_Power_Limit "The limit on how fast the battery can be discharged (positive torque)";
+CM_ BO_ 7 "the limits that are clamping the torque request from the dirver (that are wheel independant)";
+CM_ BO_ 8 "How much power the motors are using";
+CM_ BO_ 9 "information on the vehicle's state";
+CM_ SG_ 9 G_Ratio "the ratio of actual/max Gs";
+CM_ SG_ 9 G_Theoretical "the max G at the current angle";
+CM_ SG_ 9 G_Angle "angle of Gs the car is experiencing";
+CM_ SG_ 9 G_Actual "the current G of the car";
+CM_ BO_ 11 "torque vectoring info";
+CM_ SG_ 11 TV_Torque_Change_FL "the torque added onto the initial request";
+CM_ SG_ 11 TV_Torque_Change_FR "the torque added onto the initial request";
+CM_ SG_ 11 TV_Torque_Change_RL "the torque added onto the initial request";	
+CM_ SG_ 11 TV_Torque_Change_RR "the torque added onto the initial request";
+CM_ SG_ 11 TV_Active "if torque vectoring is active";
+CM_ SG_ 11 TV_Setting "from wheel knob";
+CM_ BO_ 5 "the lap time info";
+CM_ BO_ 10 "ECU-based BMS";
+CM_ BO_ 13 "the normal force on each tire";
+CM_ SG_ 13 Downforce "total for all wheels";
+CM_ BO_ 6 "speed estimation components";
+CM_ SG_ 6 Est_Speed_FL "the estimated speed of the FL wheel (with no slip)";
+CM_ SG_ 6 Est_Speed_FR "the estimated speed of the FR wheel (with no slip)";
+CM_ SG_ 6 Est_Speed_RL "the estimated speed of the RL wheel (with no slip)";
+CM_ SG_ 6 Est_Speed_RR "the estimated speed of the RR wheel (with no slip)";
+CM_ SG_ 6 Est_Speed_Vehicle "the estimated speed of the vehicle";
+CM_ BO_ 12 "the components that makes up the traction control limit";
+
+BA_DEF_  "BusType" STRING ;
+BA_DEF_DEF_  "BusType" "CAN";
+BA_ "BusType" "CAN";
+
