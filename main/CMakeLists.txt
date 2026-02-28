@@ -1,3 +1,3 @@
-idf_component_register(SRCS "main.c" "twai.c" "../components/CAN_handler/CAN_generated/can_sensor_rx_generated.c"
+idf_component_register(SRCS "main.c" "twai.c" "can_sensor_rx_generated.c" "can_sensor_tx_generated.c" "sensor.c"
                     REQUIRES driver
                     INCLUDE_DIRS ".")

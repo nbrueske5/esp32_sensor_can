@@ -14,23 +14,18 @@ from collections import OrderedDict
 # Prefix: Used for file names, struct names, and function prefixes.
 # DBC: The filename in the project root.
 BUS_CONFIG = {
-#    "inverter": {
-#        "dbc": "Inverter.dbc",
-#        "rx_receiver": "ECU",
-#        "tx_sender": "ECU"
-#    },
     "sensor": {
         "dbc": "Sensor.dbc",
-        "rx_receiver": "ECU",
-        "tx_sender": "ECU"
+        "rx_receiver": "SW",
+        "tx_sender": "SW"
     }
 }
 
 # The component directory where all files will be placed
-OUTPUT_DIR = "components/CAN_handler/CAN_generated/"
+OUTPUT_DIR = "main"
 
 # Headers required by the generated files
-EXTRA_INCLUDES = ["CANTX.h"]
+EXTRA_INCLUDES = ["twai.h"]
 
 # ==============================================================================
 # FORMATTING HELPERS

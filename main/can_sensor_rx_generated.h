@@ -1,0 +1,157 @@
+#ifndef CAN_SENSOR_RX_GENERATED_H
+#define CAN_SENSOR_RX_GENERATED_H
+
+#include <stdint.h>
+#include <stdbool.h>
+#include "freertos/FreeRTOS.h"
+#include "freertos/semphr.h"
+#include "sensor.h"
+#include "twai.h"
+
+// ----------------------------------------------------------------------
+// SENSOR BUS DATA STRUCTURE
+// ----------------------------------------------------------------------
+typedef struct {
+    float      sw_led_number;
+    float      sw_led_brightness;
+    float      sw_led_r;
+    float      imu_front_yaw_rate;
+    float      imu_front_accel_lat;
+    float      imu_front_roll_rate;
+    float      imu_front_accel_tang;
+    float      imu_front_accel_vert;
+    float      imu_mid_accel_vert;
+    float      imu_mid_roll_rate;
+    float      imu_mid_accel_tang;
+    float      imu_mid_yaw_rate;
+    float      imu_mid_accel_lat;
+    float      sbg_altitude;
+    float      sbg_undulation;
+    float      sbg_gps_latitude;
+    float      sbg_gps_longitude;
+    float      sbg_ekf_latitude;
+    float      sbg_ekf_longitude;
+    float      sbg_velocity_tang;
+    float      sbg_velocity_lat;
+    float      sbg_velocity_vert;
+    float      sbg_heading;
+    float      sbg_yaw_rate_x;
+    float      sbg_yaw_rate_y;
+    float      sbg_yaw_rate_z;
+    float      sbg_roll;
+    float      sbg_pitch;
+    float      sbg_yaw;
+    float      sbg_velocity_status;
+    float      sbg_velocity_type;
+    float      sbg_accel_tang;
+    float      sbg_accel_lat;
+    float      sbg_accel_vert;
+    float      vel_tang;
+    float      vel_lat;
+    float      vel_vert;
+    float      rotor_temp_1;
+    float      rotor_temp_2;
+    float      rotor_temp_3;
+    float      rotor_temp_4;
+    float      rotor_temp_5;
+    float      rotor_temp_6;
+    float      rotor_temp_7;
+    float      rotor_temp_8;
+    float      rotor_temp_9;
+    float      rotor_temp_10;
+    float      rotor_temp_11;
+    float      rotor_temp_12;
+    float      rotor_temp_13;
+    float      rotor_temp_14;
+    float      rotor_temp_15;
+    float      rotor_temp_16;
+    float      brake_sensor_temp;
+    float      brake_pedal_pressure_front;
+    float      brake_pressure_rear;
+    float      accel_pedal_position_1;
+    float      accel_pedal_position_2;
+    float      accel_pedal_position_arb;
+    bool       brake_flag;
+    bool       tripping_bps;
+    bool       steering_angle;
+    float      wheel_slip_fl;
+    float      wheel_slip_fr;
+    float      wheel_slip_rl;
+    float      wheel_slip_rr;
+    float      slip_target;
+    bool       pump_enabled;
+    bool       fans_enabled;
+    bool       regen_enabled;
+    bool       motors_enabled;
+    bool       rtd;
+    bool       airs;
+    bool       ecu_open_airs;
+    bool       speed_limit_enabled;
+    float      time;
+    float      tc_torque_limit_fl;
+    float      tc_torque_limit_fr;
+    float      tc_torque_limit_rl;
+    float      tc_torque_limit_rr;
+    float      tc_setting;
+    bool       tc_active;
+    float      charge_power_limit;
+    float      discharge_power_limit;
+    float      speed_lim_torque_max;
+    float      global_torque_max;
+    float      global_torque_min;
+    float      power_torque_max;
+    float      power_torque_min;
+    float      low_speed_torque_min;
+    float      motor_power_fl;
+    float      motor_power_fr;
+    float      motor_power_rl;
+    float      motor_power_rr;
+    float      g_ratio;
+    float      g_theoretical;
+    float      g_angle;
+    float      g_actual;
+    float      tv_torque_change_fl;
+    float      tv_torque_change_fr;
+    float      tv_torque_change_rl;
+    float      tv_torque_change_rr;
+    bool       tv_active;
+    float      tv_setting;
+    float      last_lap_time;
+    float      lap_counter;
+    float      last_sector_time;
+    float      sector_num;
+    float      lap_distance;
+    float      sector_distance;
+    bool       lap_timer_trigger;
+    float      ecu_last_known_soc;
+    float      ecu_soc;
+    float      total_energy_used;
+    float      ecu_soc_est_state;
+    float      normal_force_fl;
+    float      normal_force_fr;
+    float      normal_force_rl;
+    float      normal_force_rr;
+    float      downforce;
+    float      est_speed_fl;
+    float      est_speed_fr;
+    float      est_speed_rl;
+    float      est_speed_rr;
+    float      est_speed_vehicle;
+    float      tc_fb_fl;
+    float      tc_fb_fr;
+    float      tc_fb_rl;
+    float      tc_fb_rr;
+    float      tc_ff_fl;
+    float      tc_ff_fr;
+    float      tc_ff_rl;
+    float      tc_ff_rr;
+} sensor_data_t;
+
+extern sensor_data_t sensor_can_data;
+extern SemaphoreHandle_t sensor_data_mutex;
+
+// Public API
+void sensor_can_data_init(void);
+int unpack_sensor_message(uint32_t id, const uint8_t *data, size_t len);
+
+#endif // CAN_SENSOR_RX_GENERATED_H

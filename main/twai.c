@@ -7,13 +7,31 @@
 #include "freertos/task.h"
 #include "freertos/queue.h"
 
-#include "../components/CAN_handler/CAN_generated/can_sensor_rx_generated.h"
+#include "can_sensor_rx_generated.h"
+#include "can_sensor_tx_generated.h"
 
 twai_node_handle_t node_hdl = NULL;
 QueueHandle_t rxQueue_hdl = NULL;
 TaskHandle_t twai_rx_queue_hdl = NULL;
 
 static const char *TAG = "TWAI";
+
+/**
+ * Task responsible for taking twai frames from the rxQueue and unpacking them using the generated sensor can files
+ */
+static void twai_rx_task(void *param) {
+    twai_message_t message_frame;
+    uint8_t message[8] = {0};
+    for(;;) {
+        if (xQueueReceive(rxQueue_hdl, &message_frame, pdMS_TO_TICKS(20)) == pdTRUE) {
+            // unpack the message
+            if (unpack_sensor_message(message_frame.identifier, message_frame.data, message_frame.data_length_code) != 0) {
+                ESP_LOGE(TAG, "Failed unpacking frame from queue: %d", message_frame.identifier);
+            }
+        }
+        vTaskDelay(pdMS_TO_TICKS(20));
+    }
+}
 
 /**
  * Twai RX callback function. Takes the twai frame, stores it into a twai message and adds it to the rxQueue
@@ -94,29 +112,7 @@ void twai_init_node(void) {
     );
 }
 
-/**
- * Task responsible for taking twai frames from the rxQueue and unpacking them using the generated sensor can files
- */
-static void twai_rx_task(void *param) {
-    twai_message_t message_frame;
-    uint8_t message[8] = {0};
-    for(;;) {
-        if (xQueueReceive(rxQueue_hdl, &message_frame, pdMS_TO_TICKS(20)) == pdTRUE) {
-            // unpack the message
-            if (unpack_sensor_message(message_frame.identifier, message_frame.data, message_frame.data_length_code) != 0) {
-                ESP_LOGE(TAG, "Failed unpacking frame from queue: %d", message_frame.identifier);
-            }
-        }
-        vTaskDelay(pdMS_TO_TICKS(20));
-    }
-}
-
-/**
- * transmits a (max 8 byte) message through twai (can) communication
- * @param: id - the identifier of the message, tx_buff - a pointer to a buffer with the message, tx_buff_size - size of the message (bytes)
- * @return: esp_err_t if invalid message or node fails to transmit
- */
-esp_err_t twai_transmit(uint32_t id, uint8_t* tx_buff, uint8_t tx_buff_size) {
+int send_sensor_can_message(uint32_t id, uint8_t* tx_buff, uint8_t tx_buff_size) {
     // error checks
     if (tx_buff_size > 8 || id > 0x1FFFFFFF) {
         return ESP_ERR_INVALID_SIZE;
